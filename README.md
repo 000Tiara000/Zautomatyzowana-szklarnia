@@ -4,6 +4,12 @@ Projekt ma na celu ułatwienie pielęgnacji roślin szklarniowych poprzez zdalne
 
  Aby uruchomić stronę należy wejść w link: https://aurelis.netlify.app/, a następnie zalogować się lub stworyć konto.
 
+   Piliki w repozytorium:
+  
+   Backiend: https://github.com/000Tiara000/Zautomatyzowana-szklarnia/blob/main/Kod-%20micropy
+
+   Frontend: 
+
   Języki użyte do stworzenia backendu:
   
     - micropython
