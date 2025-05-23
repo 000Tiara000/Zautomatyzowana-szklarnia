@@ -1,0 +1,45 @@
+from machine import Pin, ADC
+import time
+
+SSID = 'g96'
+PASSWORD = 'rose.arcana'
+MQTT_BROKER = 'szklarnia-broker.f5atb5fcbffbbvgn.polandcentral.azurecontainer.io'
+
+# Ustawienie pinów sterujących S0–S3
+S_PINS = [Pin(14, Pin.OUT),  # S0
+          Pin(27, Pin.OUT),  # S1
+          Pin(16, Pin.OUT),  # S2 (zamieniony!)
+          Pin(25, Pin.OUT)]  # S3
+
+# Pin ADC (SIG z multipleksera)
+adc = ADC(26)  # GPIO26, czyli ADC0
+
+# Kanały, na których są czujniki (pomijamy C14)
+channels = [10, 11, 12, 13, 15]
+
+# Kalibracja wilgotności
+ADC_WET = 10000   # odczyt z mokrej gleby
+ADC_DRY = 60000   # odczyt z suchej gleby
+
+def set_channel(channel):
+    for i in range(4):
+        S_PINS[i].value((channel >> i) & 1)
+
+def read_sensor_percent(channel):
+    set_channel(channel)
+    time.sleep_ms(10)
+    raw = adc.read_u16()
+
+    # Przekształcenie na procent (100 = mokro, 0 = sucho)
+    moisture = 100 * (ADC_DRY - raw) / (ADC_DRY - ADC_WET)
+    moisture = max(0, min(100, int(moisture)))  # ograniczenie do 0–100%
+    return moisture
+
+while True:
+    print("Wilgotność gleby (%):")
+    for ch in channels:
+        percent = read_sensor_percent(ch)
+        print(f"  Kanał C{ch}: {percent}%")
+    print("-" * 30)
+    time.sleep(3)
+
