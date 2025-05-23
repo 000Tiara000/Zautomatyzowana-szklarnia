@@ -1,1 +1,2 @@
-# Zautomatyzowana-szklarnia
+Tytuł: Zautomatyzowana szklarnia - AURELIS
+Opis: 
