@@ -1,0 +1,7 @@
+<app-dashboard
+  *ngIf="authService.isAuthenticated() | async; else loggedOut"
+></app-dashboard>
+<ng-template #loggedOut>
+  <app-log-in-page></app-log-in-page>
+</ng-template>
+<!--<app-dashboard></app-dashboard>-->

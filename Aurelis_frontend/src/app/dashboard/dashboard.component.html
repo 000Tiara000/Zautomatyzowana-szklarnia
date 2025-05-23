@@ -1,0 +1,105 @@
+<div class="dashboard">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="" />
+      </div>
+    </div>
+    <div class="top-bar-right">
+      <div class="user-wrapper" *ngIf="user | async as user">
+        <p *ngIf="isMailNotSameAsName(user?.email, user?.name)">
+          {{ user?.name }}
+        </p>
+        <p>{{ user?.email }}</p>
+      </div>
+      <app-log-out-button></app-log-out-button>
+    </div>
+  </div>
+  <div class="dashboard-body">
+    <div class="title-section">
+      <div class="title-wrapper">
+        <h1 class="title">My greenhouse</h1>
+      </div>
+      <div class="dropdown-wrapper">
+        <mat-form-field>
+          <mat-label>History</mat-label>
+          <mat-select [(ngModel)]="selectedData">
+            @for (option of data; track option) {
+              <mat-option [value]="option">
+                {{ convertToBrowserLocaleDate(option.unix_ts) }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="specs-wrapper">
+      <div class="general-specs">
+        <div class="spec-wrapper">
+          <h3>Air temperature</h3>
+          <p>{{ selectedData.temperature }}°C</p>
+        </div>
+        <div class="spec-wrapper">
+          <h3>Humidity</h3>
+          <p>{{ selectedData.air_humidity }}%</p>
+        </div>
+        <div class="spec-wrapper">
+          <h3>Illuminance</h3>
+          <p>{{ selectedData.light }}%</p>
+        </div>
+      </div>
+      <div class="flower-pots-wrapper">
+        <div class="pot">
+          <div class="img-wrapper">
+            <img src="flower.png" alt="" />
+          </div>
+          <div class="text-wrapper">
+            <h3>Plant pot 1</h3>
+            <p>Soil humidity: {{ selectedData.soil_1 }}%</p>
+          </div>
+        </div>
+        <div class="pot">
+          <div class="img-wrapper">
+            <img src="cactus.png" alt="" />
+          </div>
+          <div class="text-wrapper">
+            <h3>Plant pot 1</h3>
+            <p>Soil humidity: {{ selectedData.soil_2 }}%</p>
+          </div>
+        </div>
+        <div class="pot">
+          <div class="img-wrapper">
+            <img src="plant.png" alt="" />
+          </div>
+          <div class="text-wrapper">
+            <h3>Plant pot 1</h3>
+            <p>Soil humidity: {{ selectedData.soil_3 }}%</p>
+          </div>
+        </div>
+        <div class="pot">
+          <div class="img-wrapper">
+            <img src="succulent.png" alt="" />
+          </div>
+          <div class="text-wrapper">
+            <h3>Plant pot 1</h3>
+            <p>Soil humidity: {{ selectedData.soil_4 }}%</p>
+          </div>
+        </div>
+        <div class="pot">
+          <div class="img-wrapper">
+            <img src="plant (1).png" alt="" />
+          </div>
+          <div class="text-wrapper">
+            <h3>Plant pot 1</h3>
+            <p>Soil humidity: {{ selectedData.soil_5 }}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <!--  <app-log-in-page></app-log-in-page>-->
+</ng-template>
