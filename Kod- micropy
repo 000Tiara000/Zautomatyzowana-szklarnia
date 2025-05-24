@@ -2,7 +2,7 @@ from machine import Pin, ADC
 import time
 
 SSID = 'g96'
-PASSWORD = 'rose.arcana'
+PASSWORD = 'NICE TRY, nie podam Panu swojego hasła'
 MQTT_BROKER = 'szklarnia-broker.f5atb5fcbffbbvgn.polandcentral.azurecontainer.io'
 
 # Ustawienie pinów sterujących S0–S3
