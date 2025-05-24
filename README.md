@@ -27,6 +27,10 @@ Projekt ma na celu ułatwienie pielęgnacji roślin szklarniowych poprzez zdalne
     - TIME 
     - Auth0
 
+   API:
+
+    -POSTMAN (https://aurelis.postman.co/workspace/Aurelis-Workspace~79a86c5f-e9f8-4195-8a9f-ed52e15e0048/collection/20296764-ca77c964-3bd4-4dc6-8cdd-c0edad05d68d?action=share&creator=20296764⁩)
+
 Autorki:
 
   Zuzanna Marcinkowska
