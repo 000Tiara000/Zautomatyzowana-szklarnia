@@ -1,0 +1,40 @@
+from fastapi import FastAPI
+import psycopg2
+import os
+import json
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Pozwalamy na dostęp z localhost:4200
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Konfiguracja bazy
+db_config = {
+    "host": "20.215.134.183",          # np. szklarnia-db.polandcentral.azurecontainer.io
+    "port": 5432,
+    "user": "szklarnia",
+    "password": "haslo123",
+    "dbname": "mqtt_data"
+}
+
+@app.get("/dane")
+def pobierz_dane():
+    try:
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM sensor_readings ORDER BY id DESC LIMIT 30")
+        rows = cursor.fetchall()
+        cols = [desc[0] for desc in cursor.description]
+        wynik = [dict(zip(cols, row)) for row in rows]
+        cursor.close()
+        conn.close()
+        return wynik
+    except Exception as e:
+        return {"error": str(e)}
